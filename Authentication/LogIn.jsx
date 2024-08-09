@@ -32,7 +32,7 @@ const LogIn = (props) => {
       e.preventDefault();
 
       try{
-          const response = await fetch(`http://localhost:5000/api/auth/login`,
+          const response = await fetch(`https://newsnexus-server-1.onrender.com/api/auth/login`,
           {
             method : "POST",
             headers : {
