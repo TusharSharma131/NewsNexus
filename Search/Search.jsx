@@ -1,12 +1,14 @@
 import React from "react";
 import { FaSearch, FaMicrophone } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import CategoryButtons from "../Reusable UI/CategoryButtons";
 
 
 const Search = (props) => {
   
   return (
     <>
+     <CategoryButtons/>
       <div className="flex justify-center items-center my-1">
         <div className="absolute top-16 w-3/5 md:w-3/5 lg:w-2/5 ">
           <NavLink to="/searchQuery">

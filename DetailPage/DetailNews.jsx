@@ -4,7 +4,7 @@ import DetailNewsCards from './DetailNewsCards';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from 'axios';
-
+import Search from '../Search/Search';
 
 export const DetailNews = (props) => {
 
@@ -74,6 +74,7 @@ export const DetailNews = (props) => {
   const category = props.category;
   return (
     <>
+     <Search/>
      <DetailNewsCards 
       capitalizeLetter={capitalizeLetter}
       category = {category}

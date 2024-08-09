@@ -1,19 +1,67 @@
-import React from 'react';
-import Lottie from 'react-lottie';
-import LoginAnimation from '../Images/Animation - 1712319827714.json';
-import googleIcon from '../Images/google-color-icon.svg'
+import React, { useState } from 'react';
+import LoginImage from "../Images/LoginImage.png"
 import { IoMdMail } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
+import {NavLink} from "react-router-dom";
+import { useAuth } from "../store/auth";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const LogIn = (props) => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: LoginAnimation,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
+  
+  const {storeTokenInLS} = useAuth();
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+     email : "",
+     password : "",
+  });
+
+  const handleInput = (e) =>{
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setUser({
+      ...user,
+      [name] : value,
+    });
+  }
+
+  const handleSubmit = async(e) =>{
+      e.preventDefault();
+
+      try{
+          const response = await fetch(`http://localhost:5000/api/auth/login`,
+          {
+            method : "POST",
+            headers : {
+              "Content-Type" : "application/json",
+            },
+            body : JSON.stringify(user)
+          });
+  
+          if(response.ok)
+          {
+            setUser({
+              email : "",
+              password : "",
+            });
+            toast.success("Login Successful !!");
+            const res_data = await response.json();
+            storeTokenInLS(res_data.token);
+            navigate("/headlines")
+          }else{
+            const errorData = await response.json();
+            toast.error(`Failed to Login: ${errorData.extraDetails ? errorData.extraDetails : errorData.message}`);
+          }
+      }catch(err)
+      {
+        console.log("Error during login", err);
+        toast.error("An error occurred. Please try again.")
+      }
+
+    }
 
   return (
     <>
@@ -25,12 +73,17 @@ const LogIn = (props) => {
             <div className={`font-semibold text-lg lg:text-xs ${props.mode === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
               Please enter login details below
             </div>
+
+            <form onSubmit={handleSubmit}>
             <div className={`text-lg sm:text-sm md:text-sm lg:text-xs font-semibold pt-6 pb-2 ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>
               Email
             </div>
         <div className="relative">
         <input
           type='email'
+          name='email'
+          value={user.email}
+          onChange={handleInput}
           autoComplete='on'
           autoSave='on'
           required
@@ -46,7 +99,10 @@ const LogIn = (props) => {
             </div>
             <div className="relative">
         <input
-          type='email'
+          type='password'
+          name='password'
+          value={user.password}
+          onChange={handleInput}
           autoComplete='on'
           autoSave='on'
           required
@@ -57,29 +113,18 @@ const LogIn = (props) => {
           <RiLockPasswordFill className="text-gray-400" />
         </div>
         </div>
-            <div className={`flex justify-start font-medium text-md lg:text-xs pl-40 lg:pl-44 xl:pl-44 py-3 ${props.mode === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
-              Forgot Password?
-            </div>
-            <button className={`${props.mode === 'dark' ? 'bg-white' : 'bg-black'} ml-2 lg:ml-6  xl:ml-5 mt-2 rounded-md ${props.mode === 'dark' ? 'text-black' : 'text-white'} font-bold text-lg sm:text-sm md:text-sm lg:text-xs py-2 px-28 lg:px-24`}>
+  
+            <button className={`${props.mode === 'dark' ? 'bg-white' : 'bg-black'} ml-2 lg:ml-6  xl:ml-5 mt-2 rounded-md ${props.mode === 'dark' ? 'text-black' : 'text-white'} font-bold text-lg sm:text-sm md:text-sm lg:text-xs py-2 mt-7 px-28 lg:px-24`}>
               Log in
             </button>
-            <div className='py-4 lg:pl-6 pl-4'>
-              <hr className='border border-gray-300 w-28 sm:w-32 md:w-28 lg:w-24 inline-block mb-1' />
-              <span className='text-gray-400 text-lg sm:text-sm md:text-sm lg:text-xs font-semibold px-2'>
-                or
-              </span>
-              <hr className='border border-gray-300 w-28 sm:w-32 md:w-28 lg:w-24 inline-block mb-1' />
-            </div>
-            <button className='bg-gray-300 text-black font-semibold rounded-md text-base sm:text-sm md:text-sm lg:text-xs py-2 px-16 sm:ml-1 lg:ml-5 sm:px-16 lg:px-12'>
-            <img src={googleIcon} alt='Google Icon' className='w-6 h-6 mr-2 inline-block' />
-             Log in with Google
-             </button>
+            </form>
+            
             <div className={`${props.mode === 'dark' ? 'text-gray-300' : 'text-gray-500'} font-semibold text-base sm:text-sm md:text-sm lg:text-xs py-4 sm:pl-9 lg:pl-12 pl-8`}>
-              Don't have an account? <span className={`${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>Sign Up</span>
+              Don't have an account? <span className={`${props.mode === 'dark' ? 'text-white' : 'text-black'}`}><NavLink to="/register">Register</NavLink></span>
             </div>
           </div>
           <div className='flex justify-center items-center'>
-            <Lottie options={defaultOptions} height={400} width={200} />
+          <img src={LoginImage} height={400} width={400} />
           </div>
         </div>
       </div>

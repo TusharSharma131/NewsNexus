@@ -5,7 +5,6 @@ import SearchResults from "./SearchResults";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { Everything_BASE_URL } from "../API/Api";
-// import { APIkey2 } from '../API/Api';
 import { APIkey3 } from "../API/Api";
 
 const SearchLogic = (props) => {
