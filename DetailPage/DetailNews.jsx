@@ -5,6 +5,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from 'axios';
 import Search from '../Search/Search';
+import { corsProxy } from '../API/Api';
 
 export const DetailNews = (props) => {
 
@@ -17,7 +18,7 @@ export const DetailNews = (props) => {
   
   const getData = async() =>{
     try{
-      const url = `${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
+      const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
       const parsedData = await axios(url);
       const ActualData = parsedData.data.articles;
       setNewsData(ActualData);
@@ -38,7 +39,7 @@ export const DetailNews = (props) => {
         if(page < totalPages)
         {
           setPage(page + 1);
-          const url = `${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
+          const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
           const parsedData = await axios(url);
           const ActualData = parsedData.data.articles;
           setNewsData(newsData.concat(ActualData));
@@ -55,7 +56,7 @@ export const DetailNews = (props) => {
         if(page > 1)
         {
           setPage(page - 1);
-          const url = `${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
+          const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
           const parsedData = await axios(url);
           const ActualData = parsedData.data.articles;
           setNewsData(ActualData.concat(newsData));

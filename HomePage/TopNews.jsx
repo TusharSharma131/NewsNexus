@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { topHeadlines_BASE_URL, APIkey1 } from "../API/Api";
+import { topHeadlines_BASE_URL, APIkey1, corsProxy } from "../API/Api";
 import NewsCards from "./NewsCards";
 import { categories } from "./TopNewsCategories";
 import axios from "axios";
@@ -18,7 +18,7 @@ const TopNews = (props) => {
 
         for (let category of categories) {
           const response = await axios.get(
-            `${topHeadlines_BASE_URL}?country=in&category=${category}&apiKey=${APIkey1}`
+            `${corsProxy}${topHeadlines_BASE_URL}?country=in&category=${category}&apiKey=${APIkey1}`
           );
           Data[category] = response.data.articles.slice(0, 3);
         }

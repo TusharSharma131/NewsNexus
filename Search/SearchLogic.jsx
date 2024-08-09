@@ -4,7 +4,7 @@ import Search from "./Search";
 import SearchResults from "./SearchResults";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
-import { Everything_BASE_URL } from "../API/Api";
+import { Everything_BASE_URL, corsProxy } from "../API/Api";
 import { APIkey3 } from "../API/Api";
 
 const SearchLogic = (props) => {
@@ -23,7 +23,7 @@ const SearchLogic = (props) => {
       setLoading(true);
       if (search.trim() !== "") {
         // Check if the search term is not empty
-        const url = `${Everything_BASE_URL}?q=${encodedSearch}&page=${page}&pageSize=${props.pageSize}&apiKey=${APIkey3}`;
+        const url = `${corsProxy}${Everything_BASE_URL}?q=${encodedSearch}&page=${page}&pageSize=${props.pageSize}&apiKey=${APIkey3}`;
         const response = await axios.get(url);
         const ActualData = response.data.articles;
         setNewsData(ActualData);
