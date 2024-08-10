@@ -15,7 +15,7 @@ const TopNews = (props) => {
         const Data = {};
 
         for (let category of categories) {
-          const response = await axios.get(`/.netlify/functions/fetchTopHeadlines?category=${category}&pageSize=3&page=1`);
+          const response = await axios.get(`https://news-nexus-application.netlify.app/.netlify/functions/fetchTopHeadlines?category=${category}&pageSize=3&page=1`);
           Data[category] = response.data.articles.slice(0, 3);
         }
         setNewsData(Data);

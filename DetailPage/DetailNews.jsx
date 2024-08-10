@@ -17,7 +17,7 @@ export const DetailNews = (props) => {
   
   const getData = async() => {
     try {
-      const url = `/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
+      const url = `https://news-nexus-application.netlify.app/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
       const parsedData = await axios.get(url);
       const ActualData = parsedData.data.articles;
       setNewsData(ActualData);

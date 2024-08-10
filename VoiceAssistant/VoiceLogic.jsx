@@ -15,7 +15,7 @@ const VoiceLogic = (props) => {
     try {
       setLoading(true);
       if (props.query) {
-        const url = `/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
+        const url = `https://news-nexus-application.netlify.app/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
         const response = await axios.get(url);
         const ActualData = response.data.articles;
         setNewsData(ActualData);

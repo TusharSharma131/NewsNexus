@@ -20,7 +20,7 @@ const SearchLogic = (props) => {
     try {
       setLoading(true);
       if (search.trim() !== "") {
-        const url = `/.netlify/functions/fetchSearchResults?query=${encodeURIComponent(search)}&pageSize=${props.pageSize}&page=${page}`;
+        const url = `https://news-nexus-application.netlify.app/.netlify/functions/fetchSearchResults?query=${encodeURIComponent(search)}&pageSize=${props.pageSize}&page=${page}`;
         const response = await axios.get(url);
         const ActualData = response.data.articles;
         setNewsData(ActualData);
