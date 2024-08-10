@@ -5,7 +5,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import axios from 'axios';
 import Search from '../Search/Search';
-import { corsProxy } from '../API/Api';
 
 export const DetailNews = (props) => {
 
@@ -16,57 +15,47 @@ export const DetailNews = (props) => {
   const [totalPages, setTotalPages] = useState(null)
 
   
-  const getData = async() =>{
-    try{
-      const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
-      const parsedData = await axios(url);
+  const getData = async() => {
+    try {
+      const url = `/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
+      const parsedData = await axios.get(url);
       const ActualData = parsedData.data.articles;
       setNewsData(ActualData);
-      setTotalPages(Math.ceil(parsedData.data.totalResults/props.pageSize));
+      setTotalPages(Math.ceil(parsedData.data.totalResults / props.pageSize));
       setLoading(false);
-    }catch(error){
-       console.log(error);
-       setError(true);
+    } catch(error) {
+      console.log(error);
+      setError(true);
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getData();
-  },[props.category,page]) // re-render if page change
+  }, [props.category, page]);
 
-  const fetchMoreData = async() =>{
-      try{
-        if(page < totalPages)
-        {
-          setPage(page + 1);
-          const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
-          const parsedData = await axios(url);
-          const ActualData = parsedData.data.articles;
-          setNewsData(newsData.concat(ActualData));
-          setLoading(false);
-        }
-      }catch(error){
-         console.log(error);
-         setError(true);
+  const fetchMoreData = async () => {
+    try {
+      if (page < totalPages) {
+        setPage(page + 1);
+        getData();
       }
+    } catch(error) {
+      console.log(error);
+      setError(true);
     }
+  };
 
-    const fetchPreviousData = async() =>{
-       try{
-        if(page > 1)
-        {
-          setPage(page - 1);
-          const url = `${corsProxy}${props.topHeadlines_BASE_URL}?country=${props.country}&category=${props.category}&apiKey=${props.apiKey2}&page=${page}&pageSize=${props.pageSize}`
-          const parsedData = await axios(url);
-          const ActualData = parsedData.data.articles;
-          setNewsData(ActualData.concat(newsData));
-          setLoading(false);
-         }
-       }catch(error){
-        console.log(error);
-        setError(true);
-       }
+  const fetchPreviousData = async () => {
+    try {
+      if (page > 1) {
+        setPage(page - 1);
+        getData();
+      }
+    } catch(error) {
+      console.log(error);
+      setError(true);
     }
+  };
 
   const capitalizeLetter = (first) =>{
      return first.charAt(0).toUpperCase() + first.slice(1);

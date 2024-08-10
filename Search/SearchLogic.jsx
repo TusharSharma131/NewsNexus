@@ -15,22 +15,19 @@ const SearchLogic = (props) => {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(null);
 
-  //now it is global
-  const encodedSearch = encodeURIComponent(search);
 
   const getData = async () => {
     try {
       setLoading(true);
       if (search.trim() !== "") {
-        // Check if the search term is not empty
-        const url = `${corsProxy}${Everything_BASE_URL}?q=${encodedSearch}&page=${page}&pageSize=${props.pageSize}&apiKey=${APIkey3}`;
+        const url = `/.netlify/functions/fetchSearchResults?query=${encodeURIComponent(search)}&pageSize=${props.pageSize}&page=${page}`;
         const response = await axios.get(url);
         const ActualData = response.data.articles;
         setNewsData(ActualData);
         setTotalPage(Math.ceil(response.data.totalResults / props.pageSize));
         setLoading(false);
       } else {
-        setNewsData([]); // Clear the news data if the search term is empty
+        setNewsData([]);
         setTotalPage(0);
         setLoading(false);
       }
@@ -40,6 +37,7 @@ const SearchLogic = (props) => {
       setLoading(false);
     }
   };
+
   const handleByChange = (event) => {
     setSearch(event.target.value);
   };
