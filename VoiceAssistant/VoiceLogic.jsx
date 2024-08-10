@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
-import { Everything_BASE_URL } from "../API/Api";
-import { APIkey3 } from "../API/Api";
 import VoiceCard from './VoiceCard';
 
 const VoiceLogic = (props) => {
@@ -17,7 +15,7 @@ const VoiceLogic = (props) => {
     try {
       setLoading(true);
       if (props.query) {
-        const url = `${Everything_BASE_URL}?q=${props.query}&page=${page}&pageSize=${props.pageSize}&apiKey=${APIkey3}`;
+        const url = `/.netlify/functions/fetchDetailNews?country=${props.country}&category=${props.category}&pageSize=${props.pageSize}&page=${page}`;
         const response = await axios.get(url);
         const ActualData = response.data.articles;
         setNewsData(ActualData);
