@@ -26,12 +26,12 @@ const SearchResults = (props) => {
       <>
       {props.loading && <Spinner />}
       
-      {props.newsData && (
+      {props.newsData && props.newsData.length > 0 ?  (
         <>
   <h1 className={`mb-24 text-center text-${props.mode === 'dark' ? 'white' : 'black'} text-4xl font-semibold`}>
     News from Search Query 
   </h1>
-  <div className={`mb-10 mx-14 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 text-${props.mode === 'dark' ? 'white' : 'black'} `}>
+  <div className={`mb-10 mx-5 lg:mx-14 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 text-${props.mode === 'dark' ? 'white' : 'black'} `}>
     
       <div className={`px-12 max-w-full rounded-2xl ${props.mode === 'dark' ? 'shadow' : 'shadow-lg'} ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'} ${props.mode === 'dark' ? 'shadow-white' : 'shadow-gray-400'} overflow-hidden h-full`}>
         <header className="py-4 font-semibold">
@@ -74,7 +74,12 @@ const SearchResults = (props) => {
       </div>
    </div>
     </>
-   )}
+   ) : (
+    // Message when no articles are found
+    <div className="text-center text-xl text-red-500">
+      {props.search ? `No results found for "${props.search}"` : "Please enter a search term."}
+    </div>
+  )}
  <ScrollToTop/>
   </>
   )}

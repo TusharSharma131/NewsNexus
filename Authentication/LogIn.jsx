@@ -65,9 +65,9 @@ const LogIn = (props) => {
 
   return (
     <>
-      <div className='grid place-items-center relative top-24 sm:top-16 lg:top-14 xl:top-10'>
-        <div className={`w-full lg:w-3/4 xl:w-2/4 grid grid-cols-1 sm:grid-cols-2 ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'  } shadow-lg shadow-gray-400 rounded-md`}>
-          <div className='py-4 px-10 lg:px-8'>
+      <div className='grid place-items-center relative top-24 md:top-72 sm:top-16 lg:top-36 xl:top-10'>
+        <div className={`w-full lg:w-3/4 xl:w-2/4 grid grid-cols-1 sm:grid-cols-2 ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'  } shadow-lg shadow-gray-400 rounded-md mb-28`}>
+          <div className='py-4 px-11 md:px-14 lg:px-8 '>
             <div className={`pl-14 pr-14 sm:pl-14 md:pr-28 lg:pr-16 xl:pl-10 pb-6 text-center text-3xl lg:text-3xl font-semibold ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>Log In</div>
             <div className={`font-bold text-2xl lg:text-xl pt-3 pb-4 ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>Welcome Buddy! 👋</div>
             <div className={`font-semibold text-lg lg:text-xs ${props.mode === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
@@ -75,7 +75,7 @@ const LogIn = (props) => {
             </div>
 
             <form onSubmit={handleSubmit}>
-            <div className={`text-lg sm:text-sm md:text-sm lg:text-xs font-semibold pt-6 pb-2 ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>
+            <div className={`text-lg sm:text-sm md:text-sm lg:text-xs font-semibold pt-6 pb-2  ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>
               Email
             </div>
         <div className="relative">

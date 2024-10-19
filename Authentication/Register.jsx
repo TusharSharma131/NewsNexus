@@ -34,7 +34,7 @@ const Register = (props) => {
     e.preventDefault();
   
     try {
-      const response = await fetch('https://newsnexus-server-1.onrender.com/api/auth/register', {
+      const response = await fetch(`https://newsnexus-server-1.onrender.com/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,8 +65,8 @@ const Register = (props) => {
   return (
     <>
       <div className="grid place-items-center relative top-20 md:top-44 lg:top-60 xl:top-7">
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-full sm:w-full md:w-full lg:w-3/4 xl:w-2/4 ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'} rounded-md shadow-lg shadow-gray-400`}>
-          <div className="px-11 sm:px-12 md:pl-10 lg:pl-6">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 w-full sm:w-full md:w-full lg:w-3/4 xl:w-2/4 ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'} rounded-md shadow-lg shadow-gray-400 mb-28`}>
+          <div className="px-11 sm:px-12 md:pl-10 lg:pl-6 sm:mx-0 md:mx-1 lg-mx-2">
             <div className={`pl-14 pr-14 sm:pl-0 md:pr-28 lg:pr-16 xl:pl-10 pt-2 text-center text-2xl lg:text-3xl font-semibold ${props.mode === 'dark' ? 'text-white' : 'text-black'}`}>
               Register
             </div>
@@ -171,7 +171,7 @@ const Register = (props) => {
           </div>
 
           <div
-            className="flex md:justify-center md:items-center lg:justify-center lg:items-center">
+            className="flex justify-center md:justify-center md:items-center lg:justify-center lg:items-center">
           
             <img src={RegisterImage} height={400} width={300} />
           </div>

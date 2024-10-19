@@ -31,7 +31,7 @@ const DetailNewsCards = (props) => {
   <h1 className={`mb-24 text-center text-${props.mode === 'dark' ? 'white' : 'black'} text-4xl font-semibold`}>
     All News - {props.capitalizeLetter(props.category)}
   </h1>
-  <div className={`mb-10 mx-14 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 text-${props.mode === 'dark' ? 'white' : 'black'} `}>
+  <div className={`mb-10 mx-5 lg:mx-14 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 text-${props.mode === 'dark' ? 'white' : 'black'} `}>
     <div key={props.category} className="col-span-1">
       <div className={`px-12 max-w-full rounded-2xl ${props.mode === 'dark' ? 'shadow' : 'shadow-lg'} ${props.mode === 'dark' ? 'bg-black' : 'bg-slate-200'} ${props.mode === 'dark' ? 'shadow-white' : 'shadow-gray-400'} overflow-hidden h-full`}>
         <header className="py-4 font-semibold">

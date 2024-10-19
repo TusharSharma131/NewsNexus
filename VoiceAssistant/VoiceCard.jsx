@@ -73,6 +73,9 @@ const VoiceCard = (props) => {
         ))}
       </div>
    </div>
+      <div className="text-red-600 flex justify-center">
+         <p>This feature is currently unavailable because the free plan has expired.</p>
+      </div>
     </>
    )}
  <ScrollToTop/>
